@@ -1,0 +1,32 @@
+﻿@model List<BookStore.WebUI.Dtos.CategoryDtos.ResultCategoryDto>
+
+@{
+    ViewData["Title"] = "Category List";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+<table class="table table-styling">
+
+        <tr>
+            <th>#</th>
+            <th>Category Name</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CategoryId</td>
+                <td>@item.CategoryName</td>
+            <td><a href="/Category/DeleteCategory/@item.CategoryId" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+            <td><a href="/Category/UpdateCategory/@item.CategoryId" class="btn btn-info"><i class="fa fa-pen"></i></a></td>
+            </tr>
+        }
+
+            </table>
+
+    <a href="/Category/CreateCategory" class="btn btn-primary">Add a New Category</a>
+
+
+
+

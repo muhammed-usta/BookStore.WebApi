@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Mantis-Bootstrap-1.0.0\.DS_Store" />
+    <None Include="wwwroot\Mantis-Bootstrap-1.0.0\.github\workflows\main.yml" />
+    <None Include="wwwroot\Mantis-Bootstrap-1.0.0\.github\workflows\prod.yml" />
+    <None Include="wwwroot\Mantis-Bootstrap-1.0.0\dist\.DS_Store" />
+    <None Include="wwwroot\Mantis-Bootstrap-1.0.0\src\.DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Mantis-Bootstrap-1.0.0\dist\assets\images\logo-dark.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

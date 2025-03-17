@@ -1,0 +1,36 @@
+﻿@model List<BookStore.WebUI.Dtos.ProductDtos.ResultProductDto>
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <br /> <br />
+    <table class="table table-bordered">
+
+        <tr>
+            <th>#</th>
+            <th>Product Name</th>
+            <th>Product Stock</th>
+            <th>Product Price</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.ProductStock</td>
+                <td>@item.ProductPrice</td>
+                <td><a href="/Product/DeleteProduct/@item.ProductId" class="btn btn-danger">Delete</a></td>
+                <td><a href="/Product/UpdateProduct/@item.ProductId" class="btn btn-success">Update</a></td>
+            </tr>
+        }
+
+    </table>
+
+    <a href="/Product/CreateProduct" class="btn btn-primary">Add a New Product</a>
+</div>
+
