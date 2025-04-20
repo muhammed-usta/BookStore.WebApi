@@ -2,7 +2,7 @@
 
 namespace BookStore.WebUI.ViewComponents.Default
 {
-    public class _DefaultSubscribePartialComponent:ViewComponent
+    public class _DefaultSubscriberPartialComponent: ViewComponent
     {
         public IViewComponentResult Invoke()
         {

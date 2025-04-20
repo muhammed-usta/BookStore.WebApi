@@ -1,7 +1,8 @@
 ﻿namespace BookStore.WebUI.Dtos.SubscriberDtos
 {
-    public class CreateSusbcriberDto
+    public class UpdateSubscriberDto
     {
+        public int SubscriberId { get; set; }
         public string Email { get; set; }
     }
 }

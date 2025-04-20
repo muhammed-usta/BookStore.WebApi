@@ -1,0 +1,41 @@
+﻿@model BookStore.WebUI.Dtos.SubscriberDtos.GetByIdSubscriberDto
+@{
+    ViewData["Title"] = "Update Subscriber";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow-lg">
+                <div class="card-header text-bg-light text-white text-center">
+                    <h4><i class="fas fa-plus-circle"></i> Update Subscriber</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateSubscriber" asp-controller="Subscriber" method="post">
+                        <input type="hidden" asp-for="SubscriberId" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label"><i class="fas fa-tag"></i> Subscriber Email</label>
+                                    <input type="text" asp-for="Email" class="form-control" placeholder="Enter email" required />
+
+                                    <br />
+                                    <button type="submit" class="btn btn-dark"><i class="fas fa-sync"></i>Update</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

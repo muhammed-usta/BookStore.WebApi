@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.BusinessLayer.Concrete
 {
-    public class CategoryManager:ICategoryService
+    public class CategoryManager : ICategoryService
     {
         private readonly ICategoryDal _categoryDal;
 
@@ -19,10 +19,7 @@ namespace BookStore.BusinessLayer.Concrete
         }
         public void TAdd(Category entity)
         {
-            if (entity.CategoryName.Length >= 3 && entity.CategoryName.Length <= 30 && entity.CategoryName.Contains('a'))
-            {
-                _categoryDal.Add(entity);
-            }//error message
+            _categoryDal.Add(entity);
         }
 
         public void TDelete(int id)

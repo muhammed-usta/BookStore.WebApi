@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+
+<div class="row">
+        <!-- [ sample-page ] start -->
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Product Count</h6>
+      <h4 class="mb-3">@ViewBag.productCount <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-box-multiple"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Author Count</h6>
+      <h4 class="mb-3">@ViewBag.authorCount <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-user"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Total Stock</h6>
+      <h4 class="mb-3">@ViewBag.totalStock <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-stack-2"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Most Expensive Product</h6>
+      <h4 class="mb-3">@(((Product)ViewBag.expensiveProduct)?.Name) <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-currency-dollar"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Last Added Product</h6>
+      <h4 class="mb-3">@(((Product)ViewBag.lastProduct)?.Name) <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-calendar-plus"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Subscriber Count</h6>
+      <h4 class="mb-3">@ViewBag.emailCount <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-mail"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Category Count</h6>
+      <h4 class="mb-3">@ViewBag.categoryCount <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-folders"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Longest Description Product</h6>
+      <h4 class="mb-3">@(((Product)ViewBag.longestDescriptionProduct)?.Name) <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-align-left"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Average Product Price</h6>
+      <h4 class="mb-3">@ViewBag.avgPrice <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-chart-bar"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Least Stock Product</h6>
+      <h4 class="mb-3">@(((Product)ViewBag.leastStockProduct)?.Name) <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-package"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 col-xl-2">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="mb-2 f-w-400 text-muted">Most Used Email Domain</h6>
+      <h4 class="mb-3">@ViewBag.mostUsedEmailDomain <span class="badge bg-light-primary border border-primary">
+        <i class="ti ti-at"></i></span></h4>
+    </div>
+  </div>
+</div>
+
+  <div class="col-md-6 col-xl-2">
+   <div class="card">
+     <div class="card-body">
+       <h6 class="mb-2 f-w-400 text-muted">Category With Most Stock</h6>
+       <h4 class="mb-3">@(((CategoryStockDto)ViewBag.categoryWithMostStock)?.CategoryName) <span class="badge bg-light-primary border border-primary">
+
+         <i class="ti ti-layout-grid-add"></i></span></h4>
+     </div>
+   </div>
+ </div>
+
+    <div class="col-md-12 col-xl-5">
+        <h5 class="mb-3">Category With Product Stock</h5>
+        <div class="card">
+            <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted">Category With Product Stock</h6>
+                <div id="category-chart"></div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-xl-7">
+        <h5 class="mb-3">Category Total Prices</h5>
+        <div class="card">
+            <div class="card-body">
+                <h6 class="mb-2 f-w-400 text-muted">Category Total Prices</h6>
+                <div id="category-price-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        const fetchCategoryCharts = async () => {
+          try {
+            const [stockRes, priceRes] = await Promise.all([
+        fetch("https://localhost:7293/api/Dashboards/GetCategoryProductCounts"),
+                      fetch("https://localhost:7293/api/Dashboards/GetCategoryTotalPrices")
+            ]);
+
+            const stockData = await stockRes.json();
+            const priceData = await priceRes.json();
+
+            const stockOptions = {
+              chart: {
+                type: "bar",
+                height: 300,
+                toolbar: { show: false }
+              },
+              series: [{
+                name: "Total Stock",
+                data: stockData.map(x => x.totalStock)
+              }],
+              xaxis: {
+                categories: stockData.map(x => x.categoryName),
+                labels: { style: { fontSize: '13px', colors: '#6c757d' } }
+              },
+              yaxis: {
+                labels: { style: { fontSize: '13px', colors: '#6c757d' } }
+              },
+              plotOptions: {
+                bar: {
+                  borderRadius: 4,
+                  columnWidth: '25%',
+                  distributed: true,
+                  horizontal: false
+                }
+              },
+              dataLabels: { enabled: false },
+              colors: ['#20c997', '#198754', '#0dcaf0', '#ffc107', '#fd7e14'],
+              grid: { borderColor: '#e0e6ed', strokeDashArray: 5 },
+              tooltip: { theme: 'light' }
+            };
+
+            const priceOptions = {
+              chart: {
+                type: "bar",
+                height: 300,
+                toolbar: { show: false }
+              },
+              series: [{
+                name: "Total Value (₺)",
+                data: priceData.map(x => x.totalPrice)
+              }],
+              xaxis: {
+                categories: priceData.map(x => x.categoryName),
+                labels: { style: { fontSize: '13px', colors: '#6c757d' } }
+              },
+              yaxis: {
+                labels: { style: { fontSize: '13px', colors: '#6c757d' } }
+              },
+              plotOptions: {
+                bar: {
+                  borderRadius: 4,
+                  columnWidth: '25%',
+                  distributed: true,
+                  horizontal: true
+                }
+              },
+              dataLabels: { enabled: false },
+              colors: ['#0dcaf0', '#20c997', '#198754', '#ffc107', '#fd7e14'],
+              grid: { borderColor: '#e0e6ed', strokeDashArray: 5 },
+              tooltip: { theme: 'light' }
+            };
+
+            new ApexCharts(document.querySelector("#category-chart"), stockOptions).render();
+            new ApexCharts(document.querySelector("#category-price-chart"), priceOptions).render();
+
+          } catch (err) {
+            console.error("Charts could not be loaded:", err);
+          }
+        };
+
+        fetchCategoryCharts();
+    </script>

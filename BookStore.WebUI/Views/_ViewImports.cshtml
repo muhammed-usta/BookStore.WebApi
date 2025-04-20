@@ -1,3 +1,12 @@
 ﻿@using BookStore.WebUI
 @using BookStore.WebUI.Models
+@using BookStore.EntityLayer.Concrete
+@using BookStore.WebUI.Dtos.ProductDtos
+@using BookStore.WebUI.Dtos.CategoryDtos
+@using BookStore.WebUI.Dtos.QuoteDtos
+@using BookStore.WebUI.Dtos.SubscriberDtos
+@using BookStore.WebUI.Services;
+@inject BookStore.WebUI.Services.LanguageService _localization
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+

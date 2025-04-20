@@ -2,6 +2,8 @@
 using BookStore.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
 
 namespace BookStore.WebApi.Controllers
 {
@@ -54,5 +56,69 @@ namespace BookStore.WebApi.Controllers
         {
             return Ok(_productService.TGetProductCount());
         }
+
+        [HttpGet("random")]
+        public IActionResult GetRandomProduct()
+        {
+            var randomBook = _productService.GetRandomProduct();
+            if (randomBook == null)
+            {
+                return NotFound(new { message = "No products available" });
+            }
+            return Ok(randomBook);
+        }
+        [HttpGet("GetBooksByCategory/{categoryId}")]
+        public IActionResult GetBooksByCategory(int categoryId)
+        {
+            var books = _productService
+                .TGetAllWithCategory()
+                .Where(p => p.CategoryId == categoryId)
+                .Select(p => new
+                {
+                    p.ProductId,
+                    p.Name,
+                    p.Author,
+                    p.Description,
+                    p.Price,
+                    p.ImageUrl,
+                    CategoryName = p.Category.CategoryName
+                }).ToList();
+
+            return Ok(books);
+        }
+
+
+        [HttpGet("GetCategoriesWithBooks")]
+        public IActionResult GetCategoriesWithBooks()
+        {
+            var categories = _productService
+                .TGetAllWithCategory()
+                .GroupBy(p => p.Category)
+                .Select(g => new
+                {
+                    CategoryId = g.Key.CategoryId,
+                    CategoryName = g.Key.CategoryName,
+                    Products = g.Select(p => new
+                    {
+                        p.ProductId,
+                        p.Name,
+                        p.Author,
+                        p.Description,
+                        p.Price,
+                        p.ImageUrl
+                    }).ToList()
+                }).ToList();
+
+            return Ok(categories);
+        }
+
+
+
+
+
+
+
+
+
     }
 }

@@ -1,8 +1,6 @@
-﻿
-@*
- _UILayoutHeaderPartialComponent
+﻿@using Microsoft.AspNetCore.Http
+@inject BookStore.WebUI.Services.LanguageService _localization;
 
-*@
 <div id="header-wrap">
 
 	<div class="top-content">
@@ -11,52 +9,50 @@
 				<div class="col-md-6">
 					<div class="social-links">
 						<ul>
-							<li>
-								<a href="#"><i class="icon icon-facebook"></i></a>
-							</li>
-							<li>
-								<a href="#"><i class="icon icon-twitter"></i></a>
-							</li>
-							<li>
-								<a href="#"><i class="icon icon-youtube-play"></i></a>
-							</li>
-							<li>
-								<a href="#"><i class="icon icon-behance-square"></i></a>
-							</li>
+							<li><a href="#"><i class="icon icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon icon-youtube-play"></i></a></li>
+							<li><a href="#"><i class="icon icon-behance-square"></i></a></li>
 						</ul>
-					</div><!--social-links-->
+					</div>
 				</div>
+
 				<div class="col-md-6">
-					<div class="right-element">
-						<a href="#" class="user-account for-buy">
+					<div class="right-element d-flex align-items-center justify-content-end gap-3 flex-wrap">
+
+						<!-- Account -->
+						<a href="#" class="user-account for-buy d-flex align-items-center gap-1">
 							<i class="icon icon-user"></i><span>Account</span>
 						</a>
-						<a href="#" class="cart for-buy">
-							<i class="icon icon-clipboard"></i><span>
-								Cart:(0
-								$)
-							</span>
+
+						<!-- Cart -->
+						<a href="#" class="cart for-buy d-flex align-items-center gap-1">
+							<i class="icon icon-clipboard"></i><span>Cart:(0 $)</span>
 						</a>
 
-						<div class="action-menu">
+						<!-- Search Icon (toggle için) -->
+						<a href="#" class="search-button search-toggle d-flex align-items-center" data-selector="#header-wrap">
+							<i class="icon icon-search"></i>
+						</a>
 
-							<div class="search-bar">
-								<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
-									<i class="icon icon-search"></i>
-								</a>
-								<form role="search" method="get" class="search-box">
-									<input class="search-field text search-input" placeholder="Search"
-										   type="search">
-								</form>
-							</div>
+						<!-- Language Switcher -->
+						<div class="language-switcher d-flex align-items-center small">
+							<a asp-controller="Default" asp-action="ChangeLanguage" asp-route-culture="en-US">🇺🇸</a> |
+							<a asp-controller="Default" asp-action="ChangeLanguage" asp-route-culture="tr-Tr">🇹🇷</a>
 						</div>
 
-					</div><!--top-right-->
-				</div>
+						<!-- Arama kutusu (gizli durabilir) -->
+						<form role="search" method="get" class="search-box d-none">
+							<input class="search-field text search-input" placeholder="Search" type="search">
+						</form>
 
+					</div>
+				</div>
 			</div>
 		</div>
 	</div><!--top-content-->
+
+
 
 	<header id="header">
 		<div class="container-fluid">
@@ -64,38 +60,19 @@
 
 				<div class="col-md-2">
 					<div class="main-logo">
-						<a href="index.html"><img src="~/booksaw-1.0.0/images/main-logo.png" alt="logo"></a>
+						<a href="#home"><img src="~/booksaw-1.0.0/images/main-logo.png" alt="logo"></a>
 					</div>
-
 				</div>
 
 				<div class="col-md-10">
-
 					<nav id="navbar">
 						<div class="main-menu stellarnav">
 							<ul class="menu-list">
-								<li class="menu-item active"><a href="#home">Home</a></li>
-								<li class="menu-item has-sub">
-									<a href="#pages" class="nav-link">Pages</a>
-
-									<ul>
-										<li class="active"><a href="index.html">Home</a></li>
-										<li><a href="index.html">About</a></li>
-										<li><a href="index.html">Styles</a></li>
-										<li><a href="index.html">Blog</a></li>
-										<li><a href="index.html">Post Single</a></li>
-										<li><a href="index.html">Our Store</a></li>
-										<li><a href="index.html">Product Single</a></li>
-										<li><a href="index.html">Contact</a></li>
-										<li><a href="index.html">Thank You</a></li>
-									</ul>
-
-								</li>
-								<li class="menu-item"><a href="#featured-books" class="nav-link">Featured</a></li>
-								<li class="menu-item"><a href="#popular-books" class="nav-link">Popular</a></li>
-								<li class="menu-item"><a href="#special-offer" class="nav-link">Offer</a></li>
-								<li class="menu-item"><a href="#latest-blog" class="nav-link">Articles</a></li>
-								<li class="menu-item"><a href="#download-app" class="nav-link">Download App</a></li>
+								<li class="menu-item active"><a href="#home">@_localization.Getkey("Home")</a></li>
+								<li class="menu-item"><a href="#featured-books" class="nav-link">@_localization.Getkey("Featured")</a></li>
+								<li class="menu-item"><a href="#best-selling" class="nav-link">@_localization.Getkey("Best Selling")</a></li>
+								<li class="menu-item"><a href="#popular-books" class="nav-link">@_localization.Getkey("Popular")</a></li>
+								<li class="menu-item"><a href="#subscribe" class="nav-link">@_localization.Getkey("Subscribe")</a></li>
 							</ul>
 
 							<div class="hamburger">
@@ -103,10 +80,8 @@
 								<span class="bar"></span>
 								<span class="bar"></span>
 							</div>
-
 						</div>
 					</nav>
-
 				</div>
 
 			</div>
@@ -114,3 +89,54 @@
 	</header>
 
 </div><!--header-wrap-->
+
+
+<style>
+	.right-element {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 15px;
+	}
+
+	.search-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 4px;
+		font-size: 18px;
+		color: #333;
+		cursor: pointer;
+	}
+
+		.search-button i {
+			font-size: 18px;
+			line-height: 1;
+			color: #333;
+		}
+
+	.language-switcher a {
+		text-decoration: none;
+		font-size: 14px;
+		color: inherit;
+		margin: 0 3px;
+	}
+
+	.search-box {
+		display: none;
+	}
+
+	/* Eğer tıklamayla açma yapacaksan: */
+	.search-bar.active .search-box {
+		display: block;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		background: white;
+		border: 1px solid #ccc;
+		padding: 5px;
+		z-index: 999;
+	}
+
+</style>
+

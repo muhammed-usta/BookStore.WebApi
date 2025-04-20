@@ -1,0 +1,86 @@
+﻿
+@*
+   _DefaultSubscriberPartialComponent
+*@
+
+
+<section id="subscribe">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="title-element">
+							<h2 class="section-title divider">Subscribe to our newsletter</h2>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="subscribe-content" data-aos="fade-up">
+							<p>
+                                Be the first to hear about our new arrivals, exclusive discounts, and book recommendations tailored for you.
+							</p>
+							<form id="subscriberForm">
+								<input type="text" name="email" placeholder="Enter your email address here" required>
+								<button type="submit" class="btn-subscribe">
+									<span>Send</span>
+									<i class="icon icon-send"></i>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function () {
+        $('#subscriberForm').on('submit', function (e) {
+            e.preventDefault();
+
+            var email = $('input[name="email"]').val();
+
+            if (!email) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Please enter an email address!',
+                });
+                return;
+            }
+
+            $.ajax({
+                url: '/Default/CreateSubscriber', 
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ email: email }),
+                success: function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Subscribed!',
+                        text: response.message,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        $('#subscriberForm')[0].reset();
+                    });
+                },
+                error: function (xhr) {
+                    var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : "An error occurred.";
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: errorMessage,
+                    });
+                }
+            });
+        });
+    });
+</script>
+

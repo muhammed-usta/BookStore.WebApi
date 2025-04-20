@@ -1,4 +1,4 @@
-﻿
+﻿@model ResultProductDto
 @*
     _DefaultBestsellingPartialComponent
 *@
@@ -12,10 +12,13 @@
             <div class="col-md-8">
 
                 <div class="row">
-
+                    
                     <div class="col-md-6">
+                       
+                            
+                
                         <figure class="products-thumb">
-                            <img src="~/booksaw-1.0.0/images/single-image.jpg" alt="book" class="single-image">
+                            <img src="@Model.ImageUrl" alt="book" class="single-image">
                         </figure>
                     </div>
 
@@ -24,13 +27,12 @@
                             <h2 class="section-title divider">Best Selling Book</h2>
 
                             <div class="products-content">
-                                <div class="author-name">By Timbur Hood</div>
-                                <h3 class="item-title">Birds gonna be happy</h3>
+                                <div class="author-name">@Model.Author</div>
+                                <h3 class="item-title">@Model.Name</h3>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet,
-                                    libero ipsum enim pharetra hac.
+                                   @Model.Description
                                 </p>
-                                <div class="item-price">$ 45.00</div>
+                                    <div class="item-price">@Model.Price ₺</div>
                                 <div class="btn-wrap">
                                     <a href="#" class="btn-accent-arrow">
                                         shop it now <i class="icon icon-ns-arrow-right"></i>
@@ -40,7 +42,7 @@
 
                         </div>
                     </div>
-
+                    
                 </div>
                 <!-- / row -->
 

@@ -1,7 +1,5 @@
-﻿
-@*
-   _DefaultFeaturePartialComponent
-*@
+﻿@model List<ResultProductDto>
+
 <section id="featured-books" class="py-5 my-5">
     <div class="container">
         <div class="row">
@@ -16,92 +14,56 @@
 
                 <div class="product-list" data-aos="fade-up">
                     <div class="row">
-
-                        <div class="col-md-3">
-                            <div class="product-item">
-                                <figure class="product-style">
-                                    <img src="~/booksaw-1.0.0/images/product-item1.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">
-                                        Add to
-                                        Cart
-                                    </button>
-                                </figure>
-                                <figcaption>
-                                    <h3>Simple way of piece life</h3>
-                                    <span>Armor Ramsey</span>
-                                    <div class="item-price">$ 40.00</div>
-                                </figcaption>
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-3">
+                                <div class="product-item">
+                                    <figure class="product-style">
+                                        <img src="@item.ImageUrl" alt="Books" class="product-item">
+                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart"
+                                                onclick="showBookDetails('@item.Name', '@item.Author','@item.Description', '@item.ImageUrl', '@item.Price')">
+                                            Details
+                                        </button>
+                                    </figure>
+                                    <figcaption>
+                                        <h3>@item.Name</h3>
+                                        <span>@item.Author</span>
+                                        <div class="item-price">@item.Price ₺</div>
+                                    </figcaption>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="product-item">
-                                <figure class="product-style">
-                                    <img src="~/booksaw-1.0.0/images/product-item2.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">
-                                        Add to
-                                        Cart
-                                    </button>
-                                </figure>
-                                <figcaption>
-                                    <h3>Great travel at desert</h3>
-                                    <span>Sanchit Howdy</span>
-                                    <div class="item-price">$ 38.00</div>
-                                </figcaption>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="product-item">
-                                <figure class="product-style">
-                                    <img src="~/booksaw-1.0.0/images/product-item3.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">
-                                        Add to
-                                        Cart
-                                    </button>
-                                </figure>
-                                <figcaption>
-                                    <h3>The lady beauty Scarlett</h3>
-                                    <span>Arthur Doyle</span>
-                                    <div class="item-price">$ 45.00</div>
-                                </figcaption>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="product-item">
-                                <figure class="product-style">
-                                    <img src="~/booksaw-1.0.0/images/product-item4.jpg" alt="Books" class="product-item">
-                                    <button type="button" class="add-to-cart" data-product-tile="add-to-cart">
-                                        Add to
-                                        Cart
-                                    </button>
-                                </figure>
-                                <figcaption>
-                                    <h3>Once upon a time</h3>
-                                    <span>Klien Marry</span>
-                                    <div class="item-price">$ 35.00</div>
-                                </figcaption>
-                            </div>
-                        </div>
-
-                    </div><!--ft-books-slider-->
-                </div><!--grid-->
-
-
-            </div><!--inner-content-->
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-
                 <div class="btn-wrap align-right">
                     <a href="#" class="btn-accent-arrow">
                         View all products <i class="icon icon-ns-arrow-right"></i>
                     </a>
                 </div>
-
             </div>
         </div>
     </div>
 </section>
+
+<!-- SweetAlert Script -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function showBookDetails(name, author, description, imageUrl, price) {
+        Swal.fire({
+            title: name,
+            html: `
+                <img src="${imageUrl}" alt="Book Image" style="width:100%; max-width:300px; border-radius:10px; margin-bottom:15px;">
+                <p><strong>Author:</strong> ${author}</p>
+                <p><strong>Description:</strong> ${description}</p>
+                <p><strong>Price:</strong> ${price} ₺</p>
+            `,
+            confirmButtonText: 'Close',
+            showCloseButton: true
+        });
+    }
+</script>

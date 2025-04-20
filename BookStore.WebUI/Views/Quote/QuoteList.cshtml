@@ -1,0 +1,39 @@
+﻿@model List<BookStore.WebUI.Dtos.QuoteDtos.ResultQuoteDto>
+@{
+    ViewData["Title"] = "Quote List";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+    int count = 0;
+}
+
+
+<div class="container">
+    <table class="table table-styling">
+
+        <tr>
+            <th>#</th>
+            <th>Quote Text</th>
+            <th>Author</th>
+         
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.Text</td>
+                <td>@item.Author</td>
+
+                <td><a href="/Quote/DeleteQuote/@item.QuoteId" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+                <td><a href="/Quote/UpdateQuote/@item.QuoteId" class="btn btn-info"><i class="fa fa-pen"></i></a></td>
+            </tr>
+        }
+
+    </table>
+
+    <a href="/Quote/CreateQuote" class="btn btn-primary">Add a New Quote</a>
+</div>
+
+
+

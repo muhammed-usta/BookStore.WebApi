@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookStore.EntityLayer\BookStore.EntityLayer.csproj" />
+    <ProjectReference Include="..\BookStore.WebUI\BookStore.WebUI.csproj" />
   </ItemGroup>
 
 </Project>

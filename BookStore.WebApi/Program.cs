@@ -23,6 +23,21 @@ builder.Services.AddScoped<IQuoteService, QuoteManager>();
 builder.Services.AddScoped<ISubscriberDal, EfSubscriberDal>();
 builder.Services.AddScoped<ISubscriberService, SubscriberManager>();
 
+builder.Services.AddScoped<IDashboardDal, EfDashboardDal>();
+builder.Services.AddScoped<IDashboardService, DashboardManager>();
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin()
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
 
 
 
@@ -42,6 +57,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

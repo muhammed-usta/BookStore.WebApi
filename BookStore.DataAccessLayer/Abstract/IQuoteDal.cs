@@ -9,5 +9,6 @@ namespace BookStore.DataAccessLayer.Abstract
 {
     public interface IQuoteDal:IGenericDal<Quote>
     {
+        Quote GetLastQuote();
     }
 }

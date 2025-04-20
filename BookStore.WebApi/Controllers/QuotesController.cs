@@ -53,5 +53,16 @@ namespace BookStore.WebApi.Controllers
 
             return Ok(_quoteService.TGetById(id));
         }
+
+        [HttpGet("LastQuote")]
+        public IActionResult GetLastQuote()
+        {
+            var quote = _quoteService.TGetLastQuote();
+            if (quote == null)
+                return NotFound(new { message = "Quote not found."});
+
+            return Ok(quote);
+        }
+
     }
 }

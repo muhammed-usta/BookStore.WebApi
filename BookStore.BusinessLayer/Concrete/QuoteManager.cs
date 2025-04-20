@@ -42,5 +42,11 @@ namespace BookStore.BusinessLayer.Concrete
         {
             _quoteDal.Update(entity);
         }
+
+        public Quote TGetLastQuote()
+        {
+            return _quoteDal.GetLastQuote();
+        }
+
     }
 }

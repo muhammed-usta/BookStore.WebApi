@@ -23,7 +23,7 @@ namespace BookStore.WebUI.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultSusbcriberDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultSubscriberDto>>(jsonData);
                 return View(values);
             }
 
@@ -39,7 +39,7 @@ namespace BookStore.WebUI.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> CreateSubscriber(CreateSusbcriberDto createSusbcriberDto)
+        public async Task<IActionResult> CreateSubscriber(CreateSubscriberDto createSusbcriberDto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createSusbcriberDto);
@@ -56,21 +56,21 @@ namespace BookStore.WebUI.Controllers
         public async Task<IActionResult> UpdateSubscriber(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7293/api/Subscribers/GetSubscribe?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7293/api/Subscribers/GetSubscriber?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<GetByIdQuoteDto>(jsonData);
+                var values = JsonConvert.DeserializeObject<GetByIdSubscriberDto>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateSubscriber(UpdateSusbcriberDto updateSusbcriberDto)
+        public async Task<IActionResult> UpdateSubscriber(UpdateSubscriberDto updateSubscriberDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateSusbcriberDto);
+            var jsonData = JsonConvert.SerializeObject(updateSubscriberDto);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PutAsync("https://localhost:7293/api/Subscribers", content);
             if (responseMessage.IsSuccessStatusCode)
@@ -88,6 +88,25 @@ namespace BookStore.WebUI.Controllers
             await client.DeleteAsync("https://localhost:7293/api/Subscribers?id=" + id);
             return RedirectToAction("SubscriberList");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> SendMailToAll()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var content = new StringContent("{}", Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("https://localhost:7293/api/Subscribers/SendMailToAll", content);
+
+            if (response.IsSuccessStatusCode)
+                TempData["result"] = "The email was successfully sent to all subscribers.";
+            else
+                TempData["result"] = "Something went wrong while sending emails.";
+
+            return RedirectToAction("SubscriberList");
+        }
+
+
+
     }
 
 

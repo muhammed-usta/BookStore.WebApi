@@ -2,6 +2,7 @@
 using BookStore.DataAccessLayer.Context;
 using BookStore.DataAccessLayer.Repositories;
 using BookStore.EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,12 @@ namespace BookStore.DataAccessLayer.EntityFramework
 {
     public class EfProductDal : GenericRepository<Product>, IProductDal
     {
+        private readonly BookStoreContext _context;
+
         public EfProductDal(BookStoreContext context) : base(context)
         {
+            _context = context;
+
         }
 
         public int GetProductCount()
@@ -22,5 +27,18 @@ namespace BookStore.DataAccessLayer.EntityFramework
             int value = context.Products.Count();
             return value;
         }
+
+        public Product GetRandomProduct()
+        {
+            return _context.Products
+            .OrderBy(x => Guid.NewGuid())
+            .FirstOrDefault();
+        }
+
+        public List<Product> GetProductsWithCategory()
+        {
+            return _context.Products.Include(p => p.Category).ToList();
+        }
+
     }
 }

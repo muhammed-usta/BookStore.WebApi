@@ -1,0 +1,40 @@
+﻿@model BookStore.WebUI.Dtos.QuoteDtos.CreateQuoteDto
+@{
+    ViewData["Title"] = "Create Quote";
+    Layout = "~/Views/AdminLayout/Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow-lg">
+                <div class="card-header text-bg-light text-white text-center">
+                    <h4><i class="fas fa-plus-circle"></i> Create New Quote</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post">
+                        <div class="container">
+
+
+                            <label>Quote Text</label>
+                            <input type="text" asp-for="Text" class="form-control" placeholder="Enter quote text" required/>
+                            <br />
+                            <label>Author</label>
+                            <input type="text" asp-for="Author" class="form-control" placeholder="Enter author"required />
+                            <br />
+                            
+                            <button type="submit" class="btn btn-dark"><i class="fas fa-save"></i> Save</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
